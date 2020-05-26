@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml"
+ 	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+
+   <h:body>
+      <h2>WebApp</h2>
+      <hr/>
+         <h3>Aplikacije</h3>
+      <h:button value="Go back" outcome="home.xhtml	" />
+      
+      <h:form>
+         <h4>Dodavanje</h4>
+      
+      
+      <h:panelGrid columns="2" cellpadding="5">
+      <h:outputLabel value="Ime aplikacije:"/>
+      <p:inputText value="#{AplikacijaController.aplikacija.ime}"></p:inputText>
+      
+      <h:outputLabel value="Domen:"/>
+      <h:inputText  value="#{AplikacijaController.aplikacija.domen}"></h:inputText>
+      
+      <h:outputLabel value="Dozvoljene konekcije:(Cena=1)"/>
+      <h:inputText value="#{AplikacijaController.aplikacija.dozvoljene_konekcije}"></h:inputText>
+      
+      <h:outputLabel value="Trajanje aranzmana u mesecima:"/>
+      <h:inputText  value="#{AplikacijaController.aplikacija.trajanje_aranzmana}"></h:inputText>
+      
+      <h:outputLabel value="Bandwidth:(Cena=10 po KB/s)"/>
+      <h:inputText value="#{AplikacijaController.aplikacija.bandwidth}"></h:inputText>
+      
+      <h:outputLabel value="Velicina:(Cena=100 po GB)"/>
+      <h:inputText value="#{AplikacijaController.aplikacija.velicina}"></h:inputText>
+       
+      <h:outputLabel value="Korisnik Id:"/>
+      <h:inputText value="#{AplikacijaController.aplikacija.korisnikid}"></h:inputText> 
+      
+      <p:commandButton value="Save"  action="#{AplikacijaController.saveAplikacija(AplikacijaController.aplikacija)}"></p:commandButton>
+      <h:outputLabel value="#{AplikacijaController.returnInfo}" />
+      </h:panelGrid>
+      
+      </h:form>
+      
+	  <h:form>
+	  <h4>Brisanje</h4>
+	  <h:outputLabel value="Id:"/>
+      <p:inputText value="#{AplikacijaController.deleteid}"></p:inputText>
+      <p:commandButton value="Save"  action="#{AplikacijaController.izbrisiAplikaciju(AplikacijaController.deleteid)}"></p:commandButton>
+      </h:form>
+      
+      <h:form>
+      <h4>Izracunaj broj poseta</h4>
+      <h:outputLabel value="Id:"/>
+      <p:inputText value="#{AplikacijaController.posecenostid}"></p:inputText>
+      <p:commandButton value="Save"  action="#{AplikacijaController.brojPoseta(AplikacijaController.posecenostid)}"></p:commandButton>
+      </h:form>
+      <h:form>
+      <h:dataTable value="#{AplikacijaController.listaAplikacija()}" var="a"
+    			styleClass="order-table"
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row"
+    			style="color:white;font-size:23px;font-weight:bold; margin-top:30px;text-shadow: 1px 1px 2px black, 0 0 15px green, 0 0 5px darkgreen; border:3px solid #a5e840; background-color:rgba(211, 239, 167,0.7);text-align:center; border-spacing: 5px; width:80%; margin-left:10%;">
+    	
+    		<h:column >
+    			<f:facet  name="header">
+    				Id
+    			</f:facet>
+    			<h:outputText value="#{a.id}"/>
+    		</h:column>
+ 
+    		<h:column>
+    			<f:facet name="header">
+    				Ime
+				</f:facet>
+    			<h:outputText value="#{a.ime}"/>
+    		</h:column>
+    		
+    		
+    		<h:column>
+    			<f:facet name="header">
+    				Domen 
+				</f:facet>
+    			<h:outputText value="#{a.domen}"/>
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">
+    				Cena 
+				</f:facet>
+    			<h:outputText value="#{a.cena}"/>
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">
+    				KorisnikID
+				</f:facet>
+    			<h:outputText value="#{a.korisnikid}"/>
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">
+    				Dozvoljene Konekcije
+				</f:facet>
+    			<h:outputText value="#{a.dozvoljene_konekcije}"/>
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">
+    			Bandwidth
+				</f:facet>
+    			<h:outputText value="#{a.bandwidth}"/>
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">
+    				Velicina
+				</f:facet>
+    			<h:outputText value="#{a.velicina}"/>
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">
+    				Meseci ostalo 
+				</f:facet>
+    			<h:outputText value="#{a.trajanje_aranzmana}"/>
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">
+    				Posete 
+				</f:facet>
+    			<h:outputText value="#{a.broj_poseta}"/>
+    		</h:column>
+    	
+    	</h:dataTable>
+                
+      </h:form>     
+         
+         
+   </h:body>
+</html>

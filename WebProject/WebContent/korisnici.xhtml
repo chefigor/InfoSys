@@ -1,0 +1,193 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml"
+ 	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+
+   <h:body>
+      <h2>WebApp</h2>
+      <hr/>
+         <h3>Korisnici</h3>
+      	        <div>
+             <h:button value="Go back" outcome="home.xhtml" />
+         </div>
+      <h:form>
+         <h4>Dodavanje</h4>
+      
+      
+      <h:panelGrid columns="2" cellpadding="5">
+      <h:outputLabel value="Ime:"/>
+      <p:inputText value="#{KorisnikController.korisnik.ime}"></p:inputText>
+      
+      <h:outputLabel value="Prezime:"/>
+      <h:inputText  value="#{KorisnikController.korisnik.prezime}"></h:inputText>
+      
+      <h:outputLabel value="Username:"/>
+      <h:inputText value="#{KorisnikController.korisnik.username}"></h:inputText>
+      
+      <h:outputLabel value="Password:"/>
+      <h:inputText  value="#{KorisnikController.korisnik.password}"></h:inputText>
+      
+      <h:outputLabel value="Telefon:"/>
+      <h:inputText value="#{KorisnikController.korisnik.telefon}"></h:inputText>
+      
+      <h:outputLabel value="Kartica:"/>
+      <h:inputText value="#{KorisnikController.korisnik.kartica}"></h:inputText>
+       
+      <h:outputLabel value="Paypal:"/>
+      <h:inputText value="#{KorisnikController.korisnik.paypal}"></h:inputText>
+      
+      <h:outputLabel value="Racun:"/>
+      <h:inputText value="#{KorisnikController.korisnik.racun}"></h:inputText>
+      
+      <h:outputLabel value="Stanje:"/>
+      <h:inputText value="#{KorisnikController.korisnik.stanje}"></h:inputText>   
+      
+      <h:outputLabel value="Verifikovan"/>
+  	  <h:selectOneRadio value="#{KorisnikController.korisnik.verifikovan}">
+   		<f:selectItem itemValue="DA" itemLabel="DA" />	
+   		<f:selectItem itemValue="NE" itemLabel="NE" />
+	  </h:selectOneRadio>   
+      
+      <p:commandButton value="Save"  action="#{KorisnikController.saveKorisnik(KorisnikController.korisnik)}"></p:commandButton>
+    
+      </h:panelGrid>
+      
+      </h:form>
+      
+	  <h:form>
+	  <h4>Brisanje</h4>
+	  <h:outputLabel value="Id:"/>
+      <p:inputText value="#{KorisnikController.id}"></p:inputText>
+      <p:commandButton value="Save"  action="#{KorisnikController.deleteKorisnik(KorisnikController.id)}"></p:commandButton>
+      </h:form>
+      
+      <h:form>
+      <h4>Izmeni placanja</h4>
+      <h:outputLabel value="Id:"/>
+      <p:inputText value="#{KorisnikController.sid}"></p:inputText>
+      <h:outputLabel value="Kartica:"/>
+      	<p:inputText value="#{KorisnikController.kartica}"></p:inputText>
+      <h:outputLabel value="Paypal:"/>
+      <p:inputText value="#{KorisnikController.paypal}"></p:inputText>
+      <h:outputLabel value="Racun:"/>
+      <p:inputText value="#{KorisnikController.racun}"></p:inputText>
+       <h:outputLabel value="Novo stanje:" />
+      <p:inputText value="#{KorisnikController.stanje}"></p:inputText>       
+      <p:commandButton value="Save"  action="#{KorisnikController.promeniPlacanja(KorisnikController.sid,KorisnikController.kartica,KorisnikController.paypal,KorisnikController.racun,KorisnikController.stanje)}"></p:commandButton>
+      </h:form>
+      
+      <h:form>
+      <h4>Promena verifikacije</h4>
+      <div>
+      <h:outputLabel value="Id:" />
+      <p:inputText value="#{KorisnikController.vid}"></p:inputText> 
+  	  <h:selectOneRadio value="#{KorisnikController.verifikovan}">
+   		<f:selectItem itemValue="DA" itemLabel="DA" />	
+   		<f:selectItem itemValue="NE" itemLabel="NE" />
+	  </h:selectOneRadio>
+	  <p:commandButton value="Save" action="#{KorisnikController.promeniVerifikovan(KorisnikController.vid,KorisnikController.verifikovan)}"></p:commandButton>
+      </div>
+	  </h:form>
+      <h:form>
+      
+      <h:form>
+      <h4>Izmeni šifru</h4>
+      <div>
+      <h:outputLabel value="Id:" />
+      <p:inputText value="#{KorisnikController.passwordid}"></p:inputText> 
+      <h:outputLabel value="Nova šifra:"/>
+      <p:inputText value="#{KorisnikController.password}"></p:inputText> 
+      <p:commandButton value="Save" action="#{KorisnikController.izmeniSifru(KorisnikController.passwordid,KorisnikController.password)}"></p:commandButton>    
+      </div>
+      </h:form>
+
+      
+      <h:dataTable value="#{KorisnikController.listKorisnik()}" var="k"
+    			styleClass="order-table"
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row"
+    			style="color:white;font-size:23px;font-weight:bold; margin-top:30px;text-shadow: 1px 1px 2px black, 0 0 15px green, 0 0 5px darkgreen; border:3px solid #a5e840; background-color:rgba(211, 239, 167,0.7);text-align:center; border-spacing: 5px; width:80%; margin-left:10%;">
+    	
+    		<h:column >
+    			<f:facet  name="header">
+    				Id
+    			</f:facet>
+    			<h:outputText value="#{k.id}"/>
+    		</h:column>
+ 
+    		<h:column>
+    			<f:facet name="header">
+    				Username
+				</f:facet>
+    			<h:outputText value="#{k.username}"/>
+    		</h:column>
+    		
+    		
+    		<h:column>
+    			<f:facet name="header">
+    				Ime 
+				</f:facet>
+    			<h:outputText value="#{k.ime}"/>
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">
+    				Prezime 
+				</f:facet>
+    			<h:outputText value="#{k.prezime}"/>
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">
+    				Telefon 
+				</f:facet>
+    			<h:outputText value="#{k.telefon}"/>
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">
+    				Kartica 
+				</f:facet>
+    			<h:outputText value="#{k.kartica}"/>
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">
+    				Paypal 
+				</f:facet>
+    			<h:outputText value="#{k.paypal}"/>
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">
+    				Racun 
+				</f:facet>
+    			<h:outputText value="#{k.racun}"/>
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">
+    				Stanje 
+				</f:facet>
+    			<h:outputText value="#{k.stanje}"/>
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">
+    				Verifikovan 
+				</f:facet>
+    			<h:outputText value="#{k.verifikovan}"/>
+    		</h:column>
+    	
+    	</h:dataTable>
+                
+      </h:form>     
+         
+         
+   </h:body>
+</html>
